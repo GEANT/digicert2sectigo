@@ -7,6 +7,15 @@
       X-DC-DEVKEY: "{{ digicert_api_key }}"
   register: res
 
+
+- name: Combine user email with additional_emails
+  set_fact:
+    mails: "{{ [res.json.user.email] | union(res.json.additional_emails | default([])) }}"
+
+- name: Include mail address mapping
+  include_tasks: _map_mails.yml
+  when: sectigo_email_map is defined
+
 - name: "Request new certificate through Sectigo API (common name: {{ res.json.certificate.common_name }})"
   uri:
     url: https://cert-manager.com/api/ssl/v1/enroll
@@ -21,6 +30,6 @@
       subjAltNames: "{{ res.json.certificate.dns_names|join(',') }}"
       term: "{{ sectigo_cert_term }}"
       certType: "{{ sectigo_cert_profile_id }}"
-      externalRequester: "{{ [res.json.user.email] | union(res.json.additional_emails | default([])) | join(',') }}"
+      externalRequester: "{{ mails | join(',') }}"
       comments: "{{ sectigo_cert_comments }}"
   register: sectigo1

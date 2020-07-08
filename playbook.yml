@@ -13,7 +13,6 @@
       password: "{{ sectigo_password }}"
 
 
-
   tasks:
     - name: Fetch certificate profiles from Sectigo API
       uri:
