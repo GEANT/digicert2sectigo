@@ -12,9 +12,13 @@ It will iterate over a list of Digicert order numbers and:
 Quick setup on a Debian based system:
 
 ```
-apt-get install python3-venv
+sudo apt-get -yy install git python3-venv
+git clone https://github.com/GEANT/digicert2sectigo.git
+cd digicert2sectigo
 python3 -m venv venv
 source venv/bin/activate
+pip install wheel
+pip install ansible
 ```
 
 
