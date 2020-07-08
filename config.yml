@@ -45,6 +45,6 @@ sectigo_cert_comments: |
   Briefly, the previous company we used (DigiCert) have identified a
   problem with their service and will be revoking all affected
   certificates on 11th July 2020.
-  Please can you replace your current certificate with this one before
-  11th July 2020. We have used the original CSR you created and therefore
-  the operation should be seamless for you.
+  Please can you replace your current certificate and full chain with this
+  one before 11th July 2020. We have used the original CSR you created and
+  therefore the operation should be seamless for you.
