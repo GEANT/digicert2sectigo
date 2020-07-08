@@ -1,0 +1,26 @@
+---
+- name: "Fetch data for certificate order {{ item }} from Digicert API"
+  uri:
+    url: "https://www.digicert.com/services/v2/order/certificate/{{ item }}"
+    return_content: yes
+    headers:
+      X-DC-DEVKEY: "{{ digicert_api_key }}"
+  register: res
+
+- name: "Request new certificate through Sectigo API (common name: {{ res.json.certificate.common_name }})"
+  uri:
+    url: https://cert-manager.com/api/ssl/v1/enroll
+    return_content: yes
+    method: POST
+    headers: "{{ sectigo_headers }}"
+    body_format: json
+    body:
+      orgId: "{{ sectigo_orgId }}"
+      csr: "{{ res.json.certificate.csr }}"
+      commonName: "{{ res.json.certificate.common_name }}"
+      subjAltNames: "{{ res.json.certificate.dns_names|join(',') }}"
+      term: "{{ sectigo_cert_term }}"
+      certType: "{{ sectigo_cert_profile_id }}"
+      externalRequester: "{{ [res.json.user.email] | union(res.json.additional_emails | default([])) | join(',') }}"
+      comments: "{{ sectigo_cert_comments }}"
+  register: sectigo1

@@ -1,0 +1,50 @@
+---
+
+# Digicert API key
+# Create one on https://www.digicert.com/secure/automation/api-keys/
+# using a user that has permissions to see all certificates.
+# API key restriction should be "View Only"
+digicert_api_key: MYAPIKEY
+
+
+
+
+# Sectigo org related
+# See https://wiki.surfnet.nl/display/SCERTS/REST+API
+# Institution specific
+sectigo_customerUri: mycustomer
+
+# The 'LOGIN' value of a user listed on https://cert-manager.com/customer/mycustomer?locale=en#4
+sectigo_login: mylogin
+
+# The password for this login
+sectigo_password: mypassword
+
+# The organisation ID (this is a number)
+sectigo_orgId: 12345
+
+
+
+# Sectigo certificate specifics
+#
+# The certificate profile ID (a number)
+# A list of available profiles will be printed when running the playbook
+sectigo_cert_profile_id: 9999
+
+# The certificate 'term', how many days it should be valid
+# This can only be from a list of available terms (usually just 365 or 730)
+sectigo_cert_term: 730
+
+
+# This will be added as comment to the Certificate details in the email
+# to the (external) Requester
+sectigo_cert_comments: |
+  Hello. You have received this certificate from Sectigo (the TCS provider)
+  because of a problem with the current certificate you have installed.
+  All NRENs have received a notification from GÉANT about this problem.
+  Briefly, the previous company we used (DigiCert) have identified a
+  problem with their service and will be revoking all affected
+  certificates on 11th July 2020.
+  Please can you replace your current certificate with this one before
+  11th July 2020. We have used the original CSR you created and therefore
+  the operation should be seamless for you.

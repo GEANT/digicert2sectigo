@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files: config.yml
+
+  vars:
+    digicert_orders: "{{ lookup('file', 'digicert_orders.txt').split('\n') | select('match', '^\\s*\\d+\\s*$') | map('trim') | map('int') | list  }}"
+    sectigo_headers:
+      customerUri: "{{ sectigo_customerUri }}"
+      login: "{{ sectigo_login }}"
+      password: "{{ sectigo_password }}"
+
+
+
+  tasks:
+    - name: Fetch certificate profiles from Sectigo API
+      uri:
+        url: "https://cert-manager.com/api/ssl/v1/types?organizationId={{ sectigo_orgId }}"
+        method: GET
+        return_content: yes
+        headers: "{{ sectigo_headers }}"
+      register: profiles
+      tags: never,profile      
+
+    - debug:
+        var: profiles.json
+      tags: never,profile      
+
+    - name: Process certificate orders
+      include_tasks: _cert.yml
+      loop: "{{ digicert_orders }}"
