@@ -102,7 +102,7 @@ included: /Users/dnmvisser/git/gitlab.geant.org/tandi/digicert2sectigo/_cert.yml
 TASK [Fetch data for certificate order 21399578 from Digicert API] *********************************************************************
 ok: [localhost]
 
-TASK [Request new certificate through Sectigo API (common name: proxy.eduteams.org)] ***************************************************
+TASK [Request new certificate through Sectigo API (common name: web.domain.org)] ***************************************************
 ok: [localhost]
 
 PLAY RECAP *****************************************************************************************************************************
