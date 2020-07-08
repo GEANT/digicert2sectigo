@@ -11,7 +11,7 @@
       customerUri: "{{ sectigo_customerUri }}"
       login: "{{ sectigo_login }}"
       password: "{{ sectigo_password }}"
-
+    confirm: True
 
   tasks:
     - name: Fetch certificate profiles from Sectigo API
