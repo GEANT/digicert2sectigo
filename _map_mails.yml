@@ -9,8 +9,6 @@
   loop: "{{ sectigo_email_map }}"
   loop_control:
     loop_var: mail
-    label: 
-  when: sectigo_email_map is defined
 
 - name: Mails to be used for new certificate request
   debug:
