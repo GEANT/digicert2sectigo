@@ -116,6 +116,23 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 If you look into the Certmanager, the new request should be visible (and already
 be auto approved - depending on the permissions of the API user).
 
+# More examples
+
+## Give the order number(s) as command line argument
+
+If you don't want to process a long list, but just one or two.
+Supply the numbers as a JSON list, for instance:
+
+```
+ansible-playbook playbook.yml -e digicert_orders='[12345667]'
+```
+
+or multiple numbers:
+
+```
+ansible-playbook playbook.yml -e digicert_orders='[12345667,87263332]'
+```
+
 
 # Gotchas/TODO
 
