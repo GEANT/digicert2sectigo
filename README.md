@@ -97,7 +97,7 @@ ok: [localhost] =>
 PLAY [localhost] ***********************************************************************************************************************
 
 TASK [Process certificate orders] ******************************************************************************************************
-included: /Users/dnmvisser/git/gitlab.geant.org/tandi/digicert2sectigo/_cert.yml for localhost
+included: /Users/dnmvisser/git/gitlab.com/GEANT/digicert2sectigo/_cert.yml for localhost
 
 TASK [Fetch data for certificate order 21399578 from Digicert API] *********************************************************************
 ok: [localhost]
