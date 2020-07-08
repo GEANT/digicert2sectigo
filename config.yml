@@ -48,3 +48,14 @@ sectigo_cert_comments: |
   Please can you replace your current certificate and full chain with this
   one before 11th July 2020. We have used the original CSR you created and
   therefore the operation should be seamless for you.
+
+
+# Regular expression patterns to apply to the email addresses.
+# This can be useful for 'orphan' certificates that were requested by users
+# that have left the organisation, etc.
+#
+#sectigo_email_map:
+#  - search: '^john.doe@uni.edu$'
+#    replace: 'richard.roe@uni.edu$'
+#  - search: '@old.uni.edu$'
+#    replace: '@new.uni.edu$'
