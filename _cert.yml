@@ -16,6 +16,25 @@
   include_tasks: _map_mails.yml
   when: sectigo_email_map is defined
 
+- name: Mails to be used for new certificate request
+  debug:
+    var: mails
+
+- pause:
+    prompt: |
+      commonName: {{ res.json.certificate.common_name }}
+      subjAltNames:
+
+      {% for san in res.json.certificate.dns_names %}
+       - {{ san }}
+      {% endfor %}
+
+      mails:
+      {% for mail in mails %}
+       - {{ mail }}
+      {% endfor %}
+  when: confirm|bool
+
 - name: "Request new certificate through Sectigo API (common name: {{ res.json.certificate.common_name }})"
   uri:
     url: https://cert-manager.com/api/ssl/v1/enroll

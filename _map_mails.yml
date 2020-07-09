@@ -10,6 +10,3 @@
   loop_control:
     loop_var: mail
 
-- name: Mails to be used for new certificate request
-  debug:
-    var: mails
