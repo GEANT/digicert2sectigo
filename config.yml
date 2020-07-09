@@ -51,7 +51,7 @@ sectigo_cert_comments: |
 
 
 # Regular expression patterns to apply to the email addresses.
-# This can be useful for 'orphan' certificates that were requested by users
+# This can be needed for 'orphan' certificates that were requested by users
 # that have left the organisation, etc.
 #
 #sectigo_email_map:
@@ -59,3 +59,13 @@ sectigo_cert_comments: |
 #    replace: 'richard.roe@uni.edu$'
 #  - search: '@old.uni.edu$'
 #    replace: '@new.uni.edu$'
+#
+#
+
+# Regular expression patterns to drop from the list of subjectAltNames.
+# This can be needed when domains in the original request aren't used
+# anymore, have lost their EV validation, etc.
+#
+#sectigo_drop_san_patterns:
+# - 'old.uni.edu$'
+# - 'legacy.uni.edu$'
