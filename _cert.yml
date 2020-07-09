@@ -55,6 +55,7 @@
     headers: "{{ sectigo_headers }}"
     body_format: json
     body:
+    timeout: 900
       orgId: "{{ sectigo_orgId }}"
       csr: "{{ res.json.certificate.csr }}"
       commonName: "{{ res.json.certificate.common_name }}"
