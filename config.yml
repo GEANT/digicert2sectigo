@@ -62,6 +62,12 @@ sectigo_cert_comments: |
 #
 #
 
+# List of mail addresses to be added to the original list.
+#
+#sectigo_extra_emails:
+# - tcs-admins@uni.edu
+# - admins@uni.edu
+
 # Regular expression patterns to drop from the list of subjectAltNames.
 # This can be needed when domains in the original request aren't used
 # anymore, have lost their EV validation, etc.

@@ -14,6 +14,7 @@
     # defaults, to be overriden in config.yml
     confirm: true
     sectigo_email_map: []
+    sectigo_extra_emails: []
     sectigo_drop_san_patterns: []
 
   tasks:

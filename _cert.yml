@@ -20,6 +20,10 @@
   loop_control:
     loop_var: mail
 
+- name: Add extra email addresses
+  set_fact:
+    mails: "{{ mails | union(sectigo_extra_emails) | unique }}"
+
 - name: Remove regex patterns from list of subjectAltNames
   set_fact:
     sans: "{{ sans | reject('regex', san_pattern) | list | sort }}"
