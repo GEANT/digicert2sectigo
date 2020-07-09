@@ -8,24 +8,32 @@
   register: res
 
 
-- name: Combine user email with additional_emails
+- name: Combine user email with additional_emails, and find list of subjectAltNames
   set_fact:
     mails: "{{ [res.json.user.email] | union(res.json.additional_emails | default([])) }}"
+    sans: "{{ res.json.certificate.dns_names }}"
 
-- name: Include mail address mapping
-  include_tasks: _map_mails.yml
-  when: sectigo_email_map is defined
+- name: Search/replace email addresses
+  set_fact:
+    mails: "{{ mails | map('regex_replace', mail['search'], mail['replace']) | list | sort }}"
+  loop: "{{ sectigo_email_map }}"
+  loop_control:
+    loop_var: mail
 
-- name: Mails to be used for new certificate request
-  debug:
-    var: mails
+- name: Remove regex patterns from list of subjectAltNames
+  set_fact:
+    sans: "{{ sans | reject('regex', san_pattern) | list | sort }}"
+  loop: "{{ sectigo_drop_san_patterns }}"
+  loop_control:
+    loop_var: san_pattern
 
-- pause:
+- name: Review information before submitting it
+  pause:
     prompt: |
       commonName: {{ res.json.certificate.common_name }}
       subjAltNames:
 
-      {% for san in res.json.certificate.dns_names %}
+      {% for san in sans %}
        - {{ san }}
       {% endfor %}
 
@@ -46,7 +54,7 @@
       orgId: "{{ sectigo_orgId }}"
       csr: "{{ res.json.certificate.csr }}"
       commonName: "{{ res.json.certificate.common_name }}"
-      subjAltNames: "{{ res.json.certificate.dns_names|join(',') }}"
+      subjAltNames: "{{ sans | join(',') }}"
       term: "{{ sectigo_cert_term }}"
       certType: "{{ sectigo_cert_profile_id }}"
       externalRequester: "{{ mails | join(',') }}"
