@@ -142,3 +142,58 @@ instance wildcards are not handled.
 successfully been requested through the Sectigo API.
 * Map email addresses to different ones. For example people that have
   left/fired/etc. No use in sending new certificates to them.
+
+# Extras
+
+* In order to keep an eye on the progress, run the `ac.sh` shell script every 5
+  or 10 minutes from cron. It needs a file containing with FQDNs, one per line.
+And an output file. Output looks like this:
+```
+Report generation started at 2020-07-10 17:45:00 CEST
+
+NOTE: Problem sites are those with "TERENA SSL High Assurance CA 3"
+
+Hostname                              Issuer
+====================================================
+cacti.geant.org                       GEANT EV ECC CA 4
+catalogue.geant.org                   GEANT EV ECC CA 4
+compendium.geant.org                  GEANT EV ECC CA 4
+compendiumdatabase.geant.org          GEANT EV ECC CA 4
+e-academy.geant.org                   GEANT EV ECC CA 4
+eventr.geant.org                      GEANT EV ECC CA 4
+events.geant.org                      GEANT EV ECC CA 4
+hosted.geant.org                      GEANT EV ECC CA 4
+indico.geant.org                      GEANT EV ECC CA 4
+lg.geant.org                          GEANT EV ECC CA 4
+login.geant.org                       GEANT EV ECC CA 4
+owncloud.geant.org                    GEANT EV ECC CA 4
+proxy.eduteams.org                    GEANT EV ECC CA 4
+tf-csirt.org                          GEANT EV ECC CA 4
+tnc19.geant.org                       GEANT EV ECC CA 4
+tools.geant.net                       GEANT EV ECC CA 4
+up2university.eu                      GEANT EV ECC CA 4
+wiki.geant.org                        GEANT EV ECC CA 4
+wiki.refeds.org                       GEANT EV ECC CA 4
+bamboo.software.geant.org             GEANT EV RSA CA 4
+bitbucket.software.geant.org          GEANT EV RSA CA 4
+cat.eduroam.org                       GEANT EV RSA CA 4
+edumeet.org                           GEANT EV RSA CA 4
+f-ticks.edugain.org                   GEANT EV RSA CA 4
+filesender.geant.org                  GEANT EV RSA CA 4
+gateway.geant.org                     TERENA SSL CA 3
+proxy.acc.eduteams.org                TERENA SSL CA 3
+flowmon.geant.net                     TERENA SSL High Assurance CA 3
+md-vpn-si.geant.net                   TERENA SSL High Assurance CA 3
+met.refeds.org                        TERENA SSL High Assurance CA 3
+omega.terena.org                      TERENA SSL High Assurance CA 3
+pmp-central.geant.org                 TERENA SSL High Assurance CA 3
+prod-insight.geant.org                TERENA SSL High Assurance CA 3
+reep.refeds.org                       TERENA SSL High Assurance CA 3
+sc.geant.org                          TERENA SSL High Assurance CA 3
+services.oer.geant.org                TERENA SSL High Assurance CA 3
+sso.up2university.eu                  TERENA SSL High Assurance CA 3
+swan.open.up2university.eu            TERENA SSL High Assurance CA 3
+tts.geant.net                         TERENA SSL High Assurance CA 3
+
+Report generation finished at 2020-07-10 17:47:49 CEST
+```
